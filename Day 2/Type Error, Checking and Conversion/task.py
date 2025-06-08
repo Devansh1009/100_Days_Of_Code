@@ -1,0 +1,1 @@
+print(type(len("12345")))
