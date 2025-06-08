@@ -10,3 +10,8 @@ for score in student_scores:
         max_score = score
 
 print(max_score)
+total = 0
+for number in range(1,101) :
+    total += number
+
+print(total)
