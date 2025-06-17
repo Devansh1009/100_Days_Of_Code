@@ -1,20 +1,129 @@
 import random
-word_list = ["aardvark", "baboon", "camel"]
+stages = [r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
 
-# TODO-1 - Randomly choose a word from the word_list and assign it to a variable called chosen_word. Then print it.
 
-# TODO-2 - Ask the user to guess a letter and assign their answer to a variable called guess. Make guess lowercase.
 
-# TODO-3 - Check if the letter the user guessed (guess) is one of the letters in the chosen_word. Print "Right" if it
-#  is, "Wrong" if it's not.
-word = random.choice(word_list)
-print(word)
 
-guess = input("Guess the letter in the word: ").lower()
-print(guess)
-for letter in word:
-    if letter == guess:
-        print("right")
-    else :
-        print("wrong")
 
+
+
+
+
+
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+word_list = [ "aardvark", "baboon", "camel", "elephant", "giraffe", "hippopotamus", "kangaroo", "leopard",
+    "mongoose", "narwhal", "octopus", "penguin", "quokka", "rhinoceros", "squirrel", "tiger",
+    "umbrella", "vulture", "walrus", "xenopus", "yak", "zebra", "airplane", "bicycle", "computer",
+    "dinosaur", "education", "friendship", "guitar", "happiness", "imagination", "jellyfish",
+    "keyboard", "lighthouse", "mountain", "notebook", "observatory", "painting", "question",
+    "rainbow", "sunshine", "telescope", "universe", "vacation", "waterfall", "xylophone",
+    "yesterday", "zeppelin", "adventure", "butterfly", "celebration", "discovery", "envelope",
+    "festival", "garden", "harmony", "innovation", "journey", "knowledge", "laughter", "melody",
+    "nature", "opportunity", "paradise", "quality", "research", "serenity", "tradition",
+    "understanding", "volunteer", "wisdom", "excellence", "yogurt", "zucchini", "astronomy",
+    "bakery", "chocolate", "drumstick", "escalator", "firefighter", "gymnasium", "hedgehog",
+    "illustration", "jackrabbit", "kaleidoscope", "laboratory", "microscope", "nightingale",
+    "orchestral", "photograph", "quicksand", "restaurant", "skateboard", "thunderstorm",
+    "underground", "volleyball", "windmill", "xylograph", "yesterday", "zookeeper", "appliance",
+    "blueprint", "clockwork", "dashboard", "equipment", "framework", "goldfish", "handshake",
+    "iceberg", "jukebox"
+]
+
+# TODO-1: - Create a variable called 'lives' to keep track of the number of lives left.
+#  Set 'lives' to equal 6.
+lives = 6
+chosen_word = random.choice(word_list)
+print(chosen_word)
+
+placeholder = ""
+word_length = len(chosen_word)
+for position in range(word_length):
+    placeholder += "_"
+print(placeholder)
+
+game_over = False
+correct_letters = []
+
+while not game_over:
+    guess = input("Guess a letter: ").lower()
+
+    display = ""
+
+    for letter in chosen_word:
+        if letter == guess:
+            display += letter
+            correct_letters.append(guess)
+        elif letter in correct_letters:
+            display += letter
+        else:
+            display += "_"
+
+    print(display)
+
+    # TODO-2: - If guess is not a letter in the chosen_word, Then reduce 'lives' by 1.
+    #  If lives goes down to 0 then the game should stop and it should print "You lose."
+    if guess not in chosen_word:
+        lives -= 1
+        if lives == 0:
+            game_over = True
+    if "_" not in display:
+        game_over = True
+        print("You win.")
+
+    # TODO-3: - print the ASCII art from 'stages'
+    #  that corresponds to the current number of 'lives' the user has remaining.
+    print(stages[lives])
